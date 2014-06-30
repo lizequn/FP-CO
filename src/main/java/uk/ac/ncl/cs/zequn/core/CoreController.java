@@ -1,6 +1,6 @@
 package uk.ac.ncl.cs.zequn.core;
 
-import uk.ac.ncl.cs.zequn.controller.NextTupleListener;
+import uk.ac.ncl.cs.zequn.net.controller.NextTupleListener;
 import uk.ac.ncl.cs.zequn.core.aggregation.AggregateController;
 import uk.ac.ncl.cs.zequn.core.aggregation.Index;
 import uk.ac.ncl.cs.zequn.entity.StreamTuple;
@@ -17,15 +17,33 @@ public class CoreController implements OldTupleRequester{
     private Status status = Status.WAITING;
     private int count;
     private final NextTupleListener listener;
+    /*
+    init add listener used to get tuple from other coordinator
+     */
     public CoreController(NextTupleListener listener){
         map = new HashMap<Integer, AggregateController>();
         this.listener = listener;
     }
+
+    /**
+     * Create new Aggregate, should be same with other coordinator
+     * @param id
+     * @param index
+     * @param aggregation
+     * @param slice
+     * @param range
+     * @return
+     */
     public boolean createNewController(int id,LinkedHashMap<Integer,Long> index,Aggregation aggregation,int slice,int range){
         AggregateController aggregateController = new AggregateController(id,aggregation,slice,range,this);
         map.put(id, aggregateController);
         return true;
     }
+
+    /**
+     * Working in passive mode
+     * @return
+     */
     public Map<Integer,LinkedList<Index>> passive(){
         if(map.isEmpty()) throw new IllegalStateException();
         this.status = Status.PASSIVE;
@@ -35,6 +53,12 @@ public class CoreController implements OldTupleRequester{
         }
         return result;
     }
+
+    /**
+     * Working in active mode
+     * @param info
+     * @return
+     */
     public boolean active(Map<Integer,LinkedList<Index>> info){
         if(map.isEmpty()) return false;
         this.status = Status.ACTIVE;
@@ -43,14 +67,27 @@ public class CoreController implements OldTupleRequester{
         }
         return true;
     }
-    public void offer(String id,StreamTuple tuple){
+
+    /**
+     * offer new tuple
+     * Only used in active
+     * @param tuple
+     */
+    public void offer(StreamTuple tuple){
         if(status == Status.ACTIVE){
             for(AggregateController aggregateController :map.values()){
                 aggregateController.offer(tuple);
             }
+        }else {
+            throw new IllegalStateException();
         }
     }
 
+    /**
+     * get old tuple
+     * Only used in passive
+     * @return
+     */
     public Map<Integer,Tuple> getOldTuple(){
         if(status == Status.PASSIVE){
         Map<Integer,Tuple> list = new HashMap<Integer, Tuple>();

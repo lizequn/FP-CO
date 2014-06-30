@@ -7,6 +7,14 @@ public class Result {
     private double re;
     private int size;
 
+    public void addNew(Tuple tuple){
+        re+=tuple.getInfo();
+        size+=tuple.getSize();
+    }
+    public void deleteOld(Tuple tuple){
+        re-=tuple.getInfo();
+        size-=tuple.getSize();
+    }
     public int getSize() {
         return size;
     }

@@ -9,6 +9,11 @@ public class Tuple implements Serializable {
     private double info;
     private int size;
 
+    public void increase(double d){
+        size++;
+        info+=d;
+    }
+
     public int getSize() {
         return size;
     }

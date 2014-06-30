@@ -1,4 +1,4 @@
-package uk.ac.ncl.cs.zequn.controller;
+package uk.ac.ncl.cs.zequn.net.controller;
 
 import uk.ac.ncl.cs.zequn.entity.Tuple;
 

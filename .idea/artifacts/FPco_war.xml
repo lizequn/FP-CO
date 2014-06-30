@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="FPco:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="FPco-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="FPco:war exploded" />
+    </root>
+  </artifact>
+</component>
