@@ -61,6 +61,7 @@ public class AggregateController {
                     }else {
                         index.getFirst().count--;
                         //remote get
+                        //todo
                         oldTuple = remoteOldTuple.get();
                         requester.requestNext(Config.id);
                     }

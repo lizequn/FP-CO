@@ -24,7 +24,9 @@ public class CoreController implements OldTupleRequester{
         map = new HashMap<Integer, AggregateController>();
         this.listener = listener;
     }
-
+    public boolean checkStatus(Status s){
+        return this.status == s;
+    }
     /**
      * Create new Aggregate, should be same with other coordinator
      * @param id
@@ -42,14 +44,14 @@ public class CoreController implements OldTupleRequester{
 
     /**
      * Working in passive mode
-     * @return
+     * @return new global index
      */
-    public Map<Integer,LinkedList<Index>> passive(){
+    public LinkedList<Index> passive(){
         if(map.isEmpty()) throw new IllegalStateException();
         this.status = Status.PASSIVE;
-        Map<Integer,LinkedList<Index>> result = new HashMap<Integer, LinkedList<Index>>();
+        LinkedList<Index> result = new LinkedList<Index>();
         for(AggregateController controller:map.values()){
-            result.put(controller.getAggregateID(),controller.passive());
+            result = controller.passive();
         }
         return result;
     }
@@ -59,11 +61,16 @@ public class CoreController implements OldTupleRequester{
      * @param info
      * @return
      */
-    public boolean active(Map<Integer,LinkedList<Index>> info){
+    public boolean active(LinkedList<Index> info){
         if(map.isEmpty()) return false;
+
         this.status = Status.ACTIVE;
-        for(int i: info.keySet()){
-            map.get(i).active(info.get(i));
+        for(int i: map.keySet()){
+            LinkedList<Index> index = new LinkedList<Index>();
+            for(Index in:info){
+                index.add(in);
+            }
+            map.get(i).active(index);
         }
         return true;
     }

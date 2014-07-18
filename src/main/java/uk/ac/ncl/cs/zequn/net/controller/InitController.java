@@ -2,6 +2,10 @@ package uk.ac.ncl.cs.zequn.net.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import uk.ac.ncl.cs.zequn.core.Config;
 import uk.ac.ncl.cs.zequn.net.entity.AggregationCreationEntity;
 import uk.ac.ncl.cs.zequn.net.service.CoreService;
@@ -14,19 +18,22 @@ import uk.ac.ncl.cs.zequn.strategy.AggStrategy;
 public class InitController {
     @Autowired
     private CoreService service;
-
-    public int initServer(int id){
-        Config.init(id);
+    @RequestMapping(value = "init/{id}/{f}/{b}")
+    @ResponseBody
+    public int initServer(@PathVariable int id,@PathVariable int f,@PathVariable int b){
+        Config.init(id,f,b);
         AggStrategy.init();
         service.initServer(id,new NextTupleImpl());
         return 1;
     }
-
-    public int createAggregation(AggregationCreationEntity entity){
+    @RequestMapping(value = "createAggregation")
+    @ResponseBody
+    public int createAggregation(@RequestBody AggregationCreationEntity entity){
         service.createNewAggregation(entity);
         return 1;
     }
-
+    @RequestMapping(value = "start")
+    @ResponseBody
     public int startPassive(){
         service.initStart();
         return 1;
