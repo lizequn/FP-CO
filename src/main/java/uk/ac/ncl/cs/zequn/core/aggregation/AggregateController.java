@@ -9,12 +9,13 @@ import uk.ac.ncl.cs.zequn.strategy.Aggregation;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.logging.Logger;
 
 /**
  * Created by zequnli on 1/06/2014.
  */
 public class AggregateController {
-
+    private final static Logger logger = Logger.getLogger(AggregateController.class.getName());
     private final int aggregateID;
     private final TupleFactory factory;
     private final InMemoryQueue inMemoryQueue;
@@ -41,6 +42,7 @@ public class AggregateController {
                 Tuple newTuple = factory.getTuple();
                 if(newTuple == null) newTuple = new Tuple();
                 inMemoryQueue.offer(newTuple);
+                totalCount++;
                 if(index.getLast().id == Config.id){
                     index.getLast().count++;
                 }else {
@@ -54,7 +56,8 @@ public class AggregateController {
 //                    oldTuple = inMemoryQueue.get();//
 //                }
                 //need moving window
-                if(totalCount>=sliceTime/rangeTime){
+
+                if(totalCount>=rangeTime/sliceTime){
                     if(index.getFirst().id == Config.id){
                         oldTuple = inMemoryQueue.get();
                         index.getFirst().count--;
@@ -65,13 +68,16 @@ public class AggregateController {
                         oldTuple = remoteOldTuple.get();
                         requester.requestNext(Config.id);
                     }
+                    totalCount--;
                 }
-
                 aggregation.updateResult(result,oldTuple,newTuple);
+                logger.info(result.getRe()+"");
+                logger.info(totalCount+"");
             }
         };
     }
     public Tuple get(){
+        logger.info("get Tuple");
         return inMemoryQueue.get();
     }
     public void offer(StreamTuple streamTuple){
@@ -86,6 +92,16 @@ public class AggregateController {
         for(Index index1:index){
             this.totalCount+=index1.count;
         }
+        //init
+        if(this.totalCount == 0){
+            index.clear();
+            Index i = new Index();
+            i.setId(Config.id);
+            i.setCount(0);
+            index.add(i);
+        }
+
+
     }
     public void setOldTuple(Tuple tuple){
         if(remoteOldTuple.get() ==null){
@@ -99,12 +115,13 @@ public class AggregateController {
     }
     public LinkedList<Index> passive(){
         timer.cancel();
+        logger.info("passive");
         return index;
     }
     public void active(LinkedList<Index> in){
+        logger.info("active");
         timer = new Timer();
         this.setIndex(in);
         timer.scheduleAtFixedRate(timerTask,0,sliceTime);
     }
-
 }

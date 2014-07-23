@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import uk.ac.ncl.cs.zequn.core.aggregation.Index;
+import uk.ac.ncl.cs.zequn.entity.StreamTuple;
+import uk.ac.ncl.cs.zequn.entity.TupleCollection;
 import uk.ac.ncl.cs.zequn.net.service.CoreService;
 
 import java.util.LinkedList;
@@ -20,9 +22,14 @@ public class ActiveController {
     private CoreService service;
     @RequestMapping(value = "active")
     @ResponseBody
-    public int active(@RequestBody Map<Integer,LinkedList<Index>> index){
+    public int active(@RequestBody LinkedList<Index> index){
         service.activeServer(index);
         return 1;
+    }
+    @RequestMapping(value = "stream")
+    @ResponseBody
+    public void stream(@RequestBody StreamTuple tuple){
+        service.handleStream(tuple);
     }
 
 }

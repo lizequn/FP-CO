@@ -7,9 +7,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import uk.ac.ncl.cs.zequn.core.Config;
+import uk.ac.ncl.cs.zequn.core.aggregation.Index;
 import uk.ac.ncl.cs.zequn.net.entity.AggregationCreationEntity;
 import uk.ac.ncl.cs.zequn.net.service.CoreService;
 import uk.ac.ncl.cs.zequn.strategy.AggStrategy;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by zequnli on 29/06/2014.
@@ -24,6 +28,12 @@ public class InitController {
         Config.init(id,f,b);
         AggStrategy.init();
         service.initServer(id,new NextTupleImpl());
+        return 1;
+    }
+    @RequestMapping(value = "urlMapping")
+    @ResponseBody
+    public int urlMapping(@RequestBody List<String> url){
+        Config.updateUrlMap(url);
         return 1;
     }
     @RequestMapping(value = "createAggregation")

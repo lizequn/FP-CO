@@ -3,6 +3,7 @@ package uk.ac.ncl.cs.zequn.net.service.impl;
 import org.springframework.stereotype.Service;
 import uk.ac.ncl.cs.zequn.core.Status;
 import uk.ac.ncl.cs.zequn.core.aggregation.Index;
+import uk.ac.ncl.cs.zequn.entity.StreamTuple;
 import uk.ac.ncl.cs.zequn.entity.Tuple;
 import uk.ac.ncl.cs.zequn.net.controller.NextTupleListener;
 import uk.ac.ncl.cs.zequn.core.CoreController;
@@ -13,6 +14,7 @@ import uk.ac.ncl.cs.zequn.strategy.Aggregation;
 
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.logging.Logger;
 
 /**
  * Created by zequnli on 30/06/2014.
@@ -20,9 +22,13 @@ import java.util.Map;
 @Service
 public class CoreServiceImpl implements CoreService {
     private static CoreController coreController;
+    private static Logger logger = Logger.getLogger("service");
+
+
     @Override
     public int initServer(int id,NextTupleListener listener) {
         coreController = new CoreController(listener);
+        logger.info("init");
         return 1;
     }
 
@@ -30,7 +36,8 @@ public class CoreServiceImpl implements CoreService {
     public boolean createNewAggregation(AggregationCreationEntity entity) {
         String agg = entity.getAggStrategy();
         Aggregation fun = AggStrategy.getByString(agg);
-        coreController.createNewController(entity.getId(),entity.getIndex(),fun,entity.getSlice(),entity.getRange());
+        coreController.createNewController(entity.getId(),fun,entity.getSlice(),entity.getRange());
+
         return true;
     }
 
@@ -51,5 +58,13 @@ public class CoreServiceImpl implements CoreService {
         if(coreController == null) throw new IllegalStateException();
         if(!coreController.checkStatus(Status.PASSIVE)) throw new IllegalStateException();
         coreController.active(info);
+    }
+
+    @Override
+    public void handleStream(StreamTuple tuple) {
+        if(coreController == null) throw new IllegalStateException();
+        if(!coreController.checkStatus(Status.ACTIVE)) throw new IllegalStateException();
+        coreController.offer(tuple);
+
     }
 }

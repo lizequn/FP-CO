@@ -1,6 +1,8 @@
 package uk.ac.ncl.cs.zequn.net.entity;
 
-import java.util.LinkedHashMap;
+import uk.ac.ncl.cs.zequn.core.aggregation.Index;
+
+import java.util.LinkedList;
 
 /**
  * Created by zequnli on 30/06/2014.
@@ -9,7 +11,6 @@ public class AggregationCreationEntity {
     private int id;
     private int slice;
     private int range;
-    private LinkedHashMap<Integer,Long> index;
     private String aggStrategy;
 
     public int getId() {
@@ -34,14 +35,6 @@ public class AggregationCreationEntity {
 
     public void setRange(int range) {
         this.range = range;
-    }
-
-    public LinkedHashMap<Integer, Long> getIndex() {
-        return index;
-    }
-
-    public void setIndex(LinkedHashMap<Integer, Long> index) {
-        this.index = index;
     }
 
     public String getAggStrategy() {

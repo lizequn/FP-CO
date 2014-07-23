@@ -12,6 +12,7 @@ public class Result {
         size+=tuple.getSize();
     }
     public void deleteOld(Tuple tuple){
+        if(tuple == null) return;
         re-=tuple.getInfo();
         size-=tuple.getSize();
     }

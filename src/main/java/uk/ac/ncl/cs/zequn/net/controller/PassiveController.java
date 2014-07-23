@@ -22,7 +22,7 @@ public class PassiveController {
     @RequestMapping(value = "getOldTuple/{id}")
     @ResponseBody
     public Map<Integer,Tuple> getOldTuple(@PathVariable int id){
-        if(Config.backward != id){
+        if(Config.id != id){
             throw new IllegalStateException();
         }
         return  service.getOldTuple();

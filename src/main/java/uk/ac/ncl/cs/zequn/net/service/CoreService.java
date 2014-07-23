@@ -1,6 +1,7 @@
 package uk.ac.ncl.cs.zequn.net.service;
 
 import uk.ac.ncl.cs.zequn.core.aggregation.Index;
+import uk.ac.ncl.cs.zequn.entity.StreamTuple;
 import uk.ac.ncl.cs.zequn.entity.Tuple;
 import uk.ac.ncl.cs.zequn.net.controller.NextTupleListener;
 import uk.ac.ncl.cs.zequn.net.entity.AggregationCreationEntity;
@@ -17,4 +18,5 @@ public interface CoreService {
     void initStart();
     Map<Integer,Tuple> getOldTuple();
     void activeServer(LinkedList<Index> info);
+    void handleStream(StreamTuple tuple);
 }

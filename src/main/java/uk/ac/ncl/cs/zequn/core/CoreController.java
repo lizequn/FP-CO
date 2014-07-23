@@ -8,11 +8,14 @@ import uk.ac.ncl.cs.zequn.entity.Tuple;
 import uk.ac.ncl.cs.zequn.strategy.Aggregation;
 
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by zequnli on 1/06/2014.
  */
 public class CoreController implements OldTupleRequester{
+    private static Logger logger = Logger.getLogger(CoreController.class.getName());
     private Map<Integer,AggregateController> map;
     private Status status = Status.WAITING;
     private int count;
@@ -23,6 +26,7 @@ public class CoreController implements OldTupleRequester{
     public CoreController(NextTupleListener listener){
         map = new HashMap<Integer, AggregateController>();
         this.listener = listener;
+        logger.info("init");
     }
     public boolean checkStatus(Status s){
         return this.status == s;
@@ -30,15 +34,15 @@ public class CoreController implements OldTupleRequester{
     /**
      * Create new Aggregate, should be same with other coordinator
      * @param id
-     * @param index
      * @param aggregation
      * @param slice
      * @param range
      * @return
      */
-    public boolean createNewController(int id,LinkedHashMap<Integer,Long> index,Aggregation aggregation,int slice,int range){
+    public boolean createNewController(int id,Aggregation aggregation,int slice,int range){
         AggregateController aggregateController = new AggregateController(id,aggregation,slice,range,this);
         map.put(id, aggregateController);
+        logger.info("createNewController"+id);
         return true;
     }
 
@@ -47,12 +51,14 @@ public class CoreController implements OldTupleRequester{
      * @return new global index
      */
     public LinkedList<Index> passive(){
+
         if(map.isEmpty()) throw new IllegalStateException();
         this.status = Status.PASSIVE;
         LinkedList<Index> result = new LinkedList<Index>();
         for(AggregateController controller:map.values()){
             result = controller.passive();
         }
+        logger.info("passive");
         return result;
     }
 
@@ -72,6 +78,7 @@ public class CoreController implements OldTupleRequester{
             }
             map.get(i).active(index);
         }
+        logger.info("active");
         return true;
     }
 
@@ -81,6 +88,7 @@ public class CoreController implements OldTupleRequester{
      * @param tuple
      */
     public void offer(StreamTuple tuple){
+        //logger.info("Stream Tuple");
         if(status == Status.ACTIVE){
             for(AggregateController aggregateController :map.values()){
                 aggregateController.offer(tuple);
@@ -96,6 +104,7 @@ public class CoreController implements OldTupleRequester{
      * @return
      */
     public Map<Integer,Tuple> getOldTuple(){
+        logger.info("getOldTuple");
         if(status == Status.PASSIVE){
         Map<Integer,Tuple> list = new HashMap<Integer, Tuple>();
         for(AggregateController aggregateController :map.values()){
@@ -113,6 +122,7 @@ public class CoreController implements OldTupleRequester{
     public synchronized void requestNext(int id) {
         count++;
         if(count == map.size()){
+            logger.info("Request Next");
             Map<Integer,Tuple> re =  listener.getResult(id);
             for(int i:re.keySet()){
                 map.get(i).setOldTuple(re.get(i));
