@@ -24,7 +24,7 @@ public class CoreController implements OldTupleRequester{
     private final TimerTask timeCounter;
     private Timer timer;
 
-    private int workingTime =20000;
+    private int workingTime =20;
     /*
     init add listener used to get tuple from other coordinator
      */
@@ -36,8 +36,9 @@ public class CoreController implements OldTupleRequester{
             @Override
             public void run() {
                 workingTime--;
+                logger.info("time left: "+workingTime);
                 if(workingTime == 0){
-                    workingTime =20000;
+                    workingTime =20;
                     changeActive();
                 }
             }
@@ -136,7 +137,7 @@ public class CoreController implements OldTupleRequester{
     private void changeActive(){
         ActiveRequester requester = new ActiveRequester();
         timer.cancel();
-        workingTime =20000;
+        workingTime =20;
         requester.changeActive(this.passive());
     }
 
