@@ -34,6 +34,12 @@ public class InitController {
     @ResponseBody
     public int urlMapping(@RequestBody List<String> url){
         Config.updateUrlMap(url);
+        if(url.size()-1 == Config.id){
+            Config.updateForward(0);
+        }
+        else {
+            Config.updateForward(Config.id+1);
+        }
         return 1;
     }
     @RequestMapping(value = "createAggregation")
