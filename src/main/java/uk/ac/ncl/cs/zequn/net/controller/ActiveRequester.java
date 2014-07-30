@@ -19,7 +19,7 @@ public class ActiveRequester {
         String address = Config.urlMap.get(nextId);
         //told dispatcher and next active worker
         //active next Worker
-        int f1 = restTemplate.postForObject(address+"/active",index,Integer.class);
+//        int f1 = restTemplate.postForObject(address+"/active",index,Integer.class);
         //notify dispatcher
         int f2 = restTemplate.getForObject(Config.dispatcher+"/changeActive/"+Config.id+"/"+nextId,Integer.class);
     }
