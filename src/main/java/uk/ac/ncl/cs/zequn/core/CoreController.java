@@ -9,7 +9,6 @@ import uk.ac.ncl.cs.zequn.entity.Tuple;
 import uk.ac.ncl.cs.zequn.strategy.Aggregation;
 
 import java.util.*;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -159,8 +158,14 @@ public class CoreController implements OldTupleRequester{
         if(count == map.size()){
             logger.info("Request Next");
             List<Tuple> re =  listener.getResult(id);
+
             for(int i = 0;i<re.size();i++){
-                map.get(i).setOldTuple(re.get(i));
+                System.out.println("------");
+                System.out.println(re.get(i));
+
+                AggregateController controller = map.get(i);
+                Tuple tuple = re.get(i);
+                controller.setOldTuple(tuple);
             }
             count = 0;
         }

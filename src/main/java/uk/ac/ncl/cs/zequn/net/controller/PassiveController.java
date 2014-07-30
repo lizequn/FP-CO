@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import uk.ac.ncl.cs.zequn.core.Config;
 import uk.ac.ncl.cs.zequn.entity.Tuple;
+import uk.ac.ncl.cs.zequn.net.entity.TupleCollection;
 import uk.ac.ncl.cs.zequn.net.service.CoreService;
 
 import java.util.List;
@@ -22,10 +23,12 @@ public class PassiveController {
     private CoreService service;
     @RequestMapping(value = "getOldTuple/{id}")
     @ResponseBody
-    public List<Tuple> getOldTuple(@PathVariable int id){
+    public TupleCollection getOldTuple(@PathVariable int id){
         if(Config.id != id){
             throw new IllegalStateException();
         }
-        return  service.getOldTuple();
+        TupleCollection collection = new TupleCollection();
+        collection.setList(service.getOldTuple());
+        return collection;
     }
 }

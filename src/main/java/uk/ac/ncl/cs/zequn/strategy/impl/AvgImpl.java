@@ -3,7 +3,7 @@ package uk.ac.ncl.cs.zequn.strategy.impl;
 import uk.ac.ncl.cs.zequn.entity.Result;
 import uk.ac.ncl.cs.zequn.entity.StreamTuple;
 import uk.ac.ncl.cs.zequn.entity.Tuple;
-import uk.ac.ncl.cs.zequn.entity.TupleCollection;
+import uk.ac.ncl.cs.zequn.net.entity.TupleCollection;
 import uk.ac.ncl.cs.zequn.strategy.Aggregation;
 
 import java.util.List;
