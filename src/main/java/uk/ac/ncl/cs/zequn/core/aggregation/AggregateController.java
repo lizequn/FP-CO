@@ -111,7 +111,7 @@ public class AggregateController {
                     index.getFirst().count--;
                     //remote get
                     //todo
-                    oldTuple = remoteOldTuple.get();
+                    oldTuple = remoteOldTuple.getAndSet(null);
                     requester.requestNext(index.getFirst().id);
                 }
                 totalCount--;

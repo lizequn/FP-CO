@@ -25,12 +25,6 @@ public class AvgImpl implements Aggregation {
     }
 
     @Override
-    public Tuple getTupleFromCollections(TupleCollection tupleCollection) {
-        List<StreamTuple> list = tupleCollection.getCollections();
-        Tuple tuple = new Tuple();
-        for(StreamTuple t:list){
-            tuple.increase(t.getInfo());
-        }
-        return tuple;
+    public Tuple getTupleFromCollections(TupleCollection tupleCollection) {return null;
     }
 }
