@@ -9,6 +9,7 @@ import uk.ac.ncl.cs.zequn.core.Config;
 import uk.ac.ncl.cs.zequn.entity.Tuple;
 import uk.ac.ncl.cs.zequn.net.service.CoreService;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -21,7 +22,7 @@ public class PassiveController {
     private CoreService service;
     @RequestMapping(value = "getOldTuple/{id}")
     @ResponseBody
-    public Map<Integer,Tuple> getOldTuple(@PathVariable int id){
+    public List<Tuple> getOldTuple(@PathVariable int id){
         if(Config.id != id){
             throw new IllegalStateException();
         }

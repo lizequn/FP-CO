@@ -13,6 +13,7 @@ import uk.ac.ncl.cs.zequn.strategy.AggStrategy;
 import uk.ac.ncl.cs.zequn.strategy.Aggregation;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
@@ -47,7 +48,7 @@ public class CoreServiceImpl implements CoreService {
     }
 
     @Override
-    public Map<Integer, Tuple> getOldTuple() {
+    public List<Tuple> getOldTuple() {
         if(coreController == null) throw new IllegalStateException();
         if(!coreController.checkStatus(Status.PASSIVE)) throw new IllegalStateException();
         return coreController.getOldTuple();

@@ -120,12 +120,15 @@ public class CoreController implements OldTupleRequester{
      * Only used in passive
      * @return
      */
-    public Map<Integer,Tuple> getOldTuple(){
+    public List<Tuple> getOldTuple(){
         logger.info("getOldTuple");
         if(status == Status.PASSIVE){
-        Map<Integer,Tuple> list = new HashMap<Integer, Tuple>();
-        for(AggregateController aggregateController :map.values()){
-            list.put(aggregateController.getAggregateID(), aggregateController.get());
+        List<Tuple> list = new ArrayList<Tuple>();
+//        for(AggregateController aggregateController :map.values()){
+//            list.put(aggregateController.getAggregateID(), aggregateController.get());
+//        }
+        for(int i=0;i<map.size();i++){
+            list.add(map.get(i).get());
         }
         return list;
         }
@@ -155,8 +158,8 @@ public class CoreController implements OldTupleRequester{
         count++;
         if(count == map.size()){
             logger.info("Request Next");
-            Map<Integer,Tuple> re =  listener.getResult(id);
-            for(int i:re.keySet()){
+            List<Tuple> re =  listener.getResult(id);
+            for(int i = 0;i<re.size();i++){
                 map.get(i).setOldTuple(re.get(i));
             }
             count = 0;
