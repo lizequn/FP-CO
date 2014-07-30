@@ -112,10 +112,11 @@ public class AggregateController {
                     //remote get
                     //todo
                     oldTuple = remoteOldTuple.get();
-                    requester.requestNext(Config.id);
+                    requester.requestNext(index.getFirst().id);
                 }
                 totalCount--;
             }
+
             aggregation.updateResult(result,oldTuple,newTuple);
             logger.info(result.getRe()+"");
             logger.info(totalCount+"");
