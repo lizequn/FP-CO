@@ -18,5 +18,6 @@ public interface CoreService {
     void initStart();
     Map<Integer,Tuple> getOldTuple();
     void activeServer(LinkedList<Index> info);
+    LinkedList<Index> passiveServer();
     void handleStream(StreamTuple tuple);
 }

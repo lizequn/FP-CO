@@ -21,8 +21,8 @@ public class CoreController implements OldTupleRequester{
     private Status status = Status.WAITING;
     private int count;
     private final NextTupleListener listener;
-    private final TimerTask timeCounter;
-    private Timer timer;
+    //private final TimerTask timeCounter;
+    //private Timer timer;
 
     private int workingTime =20;
     /*
@@ -32,17 +32,17 @@ public class CoreController implements OldTupleRequester{
         map = new HashMap<Integer, AggregateController>();
         this.listener = listener;
         logger.info("init");
-        timeCounter = new TimerTask() {
-            @Override
-            public void run() {
-                workingTime--;
-                logger.info("time left: "+workingTime);
-                if(workingTime == 0){
-                    workingTime =20;
-                    changeActive();
-                }
-            }
-        };
+//        timeCounter = new TimerTask() {
+//            @Override
+//            public void run() {
+//                workingTime--;
+//                logger.info("time left: "+workingTime);
+//                if(workingTime == 0){
+//                    workingTime =20;
+//                    changeActive();
+//                }
+//            }
+//        };
     }
     public boolean checkStatus(Status s){
         return this.status == s;
@@ -93,8 +93,8 @@ public class CoreController implements OldTupleRequester{
             }
             map.get(i).active(index);
         }
-        timer = new Timer();
-        timer.scheduleAtFixedRate(timeCounter,0,1000);
+//        timer = new Timer();
+//        timer.scheduleAtFixedRate(timeCounter,0,1000);
         logger.info("active");
         return true;
     }
@@ -136,8 +136,8 @@ public class CoreController implements OldTupleRequester{
 
     private void changeActive(){
         ActiveRequester requester = new ActiveRequester();
-        timer.cancel();
-        workingTime =20;
+//        timer.cancel();
+//        workingTime =20;
         requester.changeActive(this.passive());
     }
 

@@ -61,6 +61,13 @@ public class CoreServiceImpl implements CoreService {
     }
 
     @Override
+    public LinkedList<Index> passiveServer() {
+        if(coreController == null) throw new IllegalStateException();
+        if(coreController.checkStatus(Status.PASSIVE)) throw new IllegalStateException();
+        return coreController.passive();
+    }
+
+    @Override
     public void handleStream(StreamTuple tuple) {
         if(coreController == null) throw new IllegalStateException();
         if(!coreController.checkStatus(Status.ACTIVE)) throw new IllegalStateException();

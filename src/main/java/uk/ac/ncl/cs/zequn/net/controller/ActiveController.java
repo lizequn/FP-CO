@@ -26,6 +26,11 @@ public class ActiveController {
         service.activeServer(index);
         return 1;
     }
+    @RequestMapping(value = "stopActive")
+    @ResponseBody
+    public LinkedList<Index> stopActive(){
+        return service.passiveServer();
+    }
     @RequestMapping(value = "stream")
     @ResponseBody
     public void stream(@RequestBody StreamTuple tuple){
