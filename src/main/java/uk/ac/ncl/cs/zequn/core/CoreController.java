@@ -159,12 +159,11 @@ public class CoreController implements OldTupleRequester{
             logger.info("Request Next");
             List<Tuple> re =  listener.getResult(id);
             if(re ==null){
+                logger.info("RN:null");
                 return;
             }
+            logger.info("RN:1");
             for(int i = 0;i<re.size();i++){
-                System.out.println("------");
-                System.out.println(re.get(i));
-
                 AggregateController controller = map.get(i);
                 Tuple tuple = re.get(i);
                 controller.setOldTuple(tuple);

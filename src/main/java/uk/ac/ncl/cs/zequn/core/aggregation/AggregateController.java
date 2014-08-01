@@ -175,6 +175,7 @@ public class AggregateController {
         logger.info("active");
         timer = new Timer();
         this.setIndex(in);
+        logger.info("index:" +in.getFirst());
         timer.scheduleAtFixedRate(new myTimerTask(),0,sliceTime);
     }
 }

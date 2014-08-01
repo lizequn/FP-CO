@@ -7,6 +7,7 @@ public class Index {
         public int id;
         public long count;
 
+
     public int getId() {
         return id;
     }
@@ -21,5 +22,13 @@ public class Index {
 
     public void setCount(long count) {
         this.count = count;
+    }
+
+    @Override
+    public String toString() {
+        return "Index{" +
+                "id=" + id +
+                ", count=" + count +
+                '}';
     }
 }
