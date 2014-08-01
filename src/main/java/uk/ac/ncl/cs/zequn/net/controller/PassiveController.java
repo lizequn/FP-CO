@@ -28,7 +28,14 @@ public class PassiveController {
             throw new IllegalStateException();
         }
         TupleCollection collection = new TupleCollection();
-        collection.setList(service.getOldTuple());
+        try{
+
+            collection.setList(service.getOldTuple());
+        }catch (IllegalStateException e){
+            collection.setList(null);
+            collection.setState(-1);
+        }
+
         return collection;
     }
 }

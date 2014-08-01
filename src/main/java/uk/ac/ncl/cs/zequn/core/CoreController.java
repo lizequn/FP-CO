@@ -158,7 +158,9 @@ public class CoreController implements OldTupleRequester{
         if(count == map.size()){
             logger.info("Request Next");
             List<Tuple> re =  listener.getResult(id);
-
+            if(re ==null){
+                return;
+            }
             for(int i = 0;i<re.size();i++){
                 System.out.println("------");
                 System.out.println(re.get(i));
