@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="bfe635ce-9822-467a-9a52-a2dbd390afda" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/uk/ac/ncl/cs/zequn/core/aggregation/AggregateController.java" afterPath="$PROJECT_DIR$/src/main/java/uk/ac/ncl/cs/zequn/core/aggregation/AggregateController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/uk/ac/ncl/cs/zequn/strategy/impl/AvgImpl.java" afterPath="$PROJECT_DIR$/src/main/java/uk/ac/ncl/cs/zequn/strategy/impl/AvgImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="FPco.iws" />
@@ -99,8 +98,8 @@
       <file leaf-file-name="AggregateController.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/uk/ac/ncl/cs/zequn/core/aggregation/AggregateController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6125" vertical-offset="1349" max-vertical-offset="2415">
-              <caret line="115" column="17" selection-start-line="115" selection-start-column="17" selection-end-line="115" selection-end-column="17" />
+            <state vertical-scroll-proportion="0.6057047" vertical-offset="1154" max-vertical-offset="2520">
+              <caret line="113" column="45" selection-start-line="113" selection-start-column="45" selection-end-line="113" selection-end-column="45" />
               <folding>
                 <element signature="e#954#961#0" expanded="true" />
               </folding>
@@ -865,7 +864,7 @@
       <workItem from="1405497194077" duration="74000" />
       <workItem from="1405719215160" duration="23131000" />
       <workItem from="1406212637049" duration="6036000" />
-      <workItem from="1406736200182" duration="7549000" />
+      <workItem from="1406736200182" duration="7993000" />
     </task>
     <task id="LOCAL-00001" summary="god">
       <created>1404142707036</created>
@@ -911,11 +910,15 @@
       <created>1406744117841</created>
       <updated>1406744117841</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="fix atomic request">
+      <created>1406744490437</created>
+      <updated>1406744490437</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="66182000" />
+    <option name="totallyTimeSpent" value="66626000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1209" height="778" extended-state="6" />
@@ -940,10 +943,10 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3487575" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19451585" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28191945" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34848484" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34848484" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -976,7 +979,8 @@
     <MESSAGE value="v2" />
     <MESSAGE value="fix timer" />
     <MESSAGE value="fix request next" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix request next" />
+    <MESSAGE value="fix atomic request" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix atomic request" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1371,8 +1375,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/uk/ac/ncl/cs/zequn/core/aggregation/AggregateController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6125" vertical-offset="1349" max-vertical-offset="2415">
-          <caret line="115" column="17" selection-start-line="115" selection-start-column="17" selection-end-line="115" selection-end-column="17" />
+        <state vertical-scroll-proportion="0.6057047" vertical-offset="1154" max-vertical-offset="2520">
+          <caret line="113" column="45" selection-start-line="113" selection-start-column="45" selection-end-line="113" selection-end-column="45" />
           <folding>
             <element signature="e#954#961#0" expanded="true" />
           </folding>

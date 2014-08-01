@@ -107,13 +107,20 @@ public class AggregateController {
                 if(index.getFirst().id == Config.id){
                     oldTuple = inMemoryQueue.get();
                     index.getFirst().count--;
+                    if(index.getFirst().count ==0){
+                        index.pollFirst();
+                    }
                 }else {
                     index.getFirst().count--;
+                    if(index.getFirst().count ==0){
+                        index.pollFirst();
+                    }
                     //remote get
                     //todo
                     oldTuple = remoteOldTuple.getAndSet(null);
                     requester.requestNext(index.getFirst().id);
                 }
+
                 totalCount--;
             }
 
