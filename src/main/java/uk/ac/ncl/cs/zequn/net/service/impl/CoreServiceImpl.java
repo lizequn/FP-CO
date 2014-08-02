@@ -7,6 +7,7 @@ import uk.ac.ncl.cs.zequn.entity.StreamTuple;
 import uk.ac.ncl.cs.zequn.entity.Tuple;
 import uk.ac.ncl.cs.zequn.net.controller.NextTupleListener;
 import uk.ac.ncl.cs.zequn.core.CoreController;
+import uk.ac.ncl.cs.zequn.net.entity.ActiveEntity;
 import uk.ac.ncl.cs.zequn.net.entity.AggregationCreationEntity;
 import uk.ac.ncl.cs.zequn.net.service.CoreService;
 import uk.ac.ncl.cs.zequn.strategy.AggStrategy;
@@ -55,10 +56,10 @@ public class CoreServiceImpl implements CoreService {
     }
 
     @Override
-    public void activeServer(LinkedList<Index> info) {
+    public void activeServer(ActiveEntity entity) {
         if(coreController == null) throw new IllegalStateException();
         if(!coreController.checkStatus(Status.PASSIVE)) throw new IllegalStateException();
-        coreController.active(info);
+        coreController.active(entity.getIndex(),entity.getResult());
     }
 
     @Override

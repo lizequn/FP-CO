@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import uk.ac.ncl.cs.zequn.core.aggregation.Index;
 import uk.ac.ncl.cs.zequn.entity.StreamTuple;
+import uk.ac.ncl.cs.zequn.net.entity.ActiveEntity;
 import uk.ac.ncl.cs.zequn.net.service.CoreService;
 
 import java.util.LinkedList;
@@ -20,8 +21,8 @@ public class ActiveController {
     private CoreService service;
     @RequestMapping(value = "active")
     @ResponseBody
-    public int active(@RequestBody LinkedList<Index> index){
-        service.activeServer(index);
+    public int active(@RequestBody ActiveEntity entity){
+        service.activeServer(entity);
         return 1;
     }
     @RequestMapping(value = "stopActive")

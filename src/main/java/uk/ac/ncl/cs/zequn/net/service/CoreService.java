@@ -4,6 +4,7 @@ import uk.ac.ncl.cs.zequn.core.aggregation.Index;
 import uk.ac.ncl.cs.zequn.entity.StreamTuple;
 import uk.ac.ncl.cs.zequn.entity.Tuple;
 import uk.ac.ncl.cs.zequn.net.controller.NextTupleListener;
+import uk.ac.ncl.cs.zequn.net.entity.ActiveEntity;
 import uk.ac.ncl.cs.zequn.net.entity.AggregationCreationEntity;
 
 import java.util.LinkedList;
@@ -18,7 +19,7 @@ public interface CoreService {
     boolean createNewAggregation(AggregationCreationEntity entity);
     void initStart();
     List<Tuple> getOldTuple();
-    void activeServer(LinkedList<Index> info);
+    void activeServer(ActiveEntity entity);
     LinkedList<Index> passiveServer();
     void handleStream(StreamTuple tuple);
 }

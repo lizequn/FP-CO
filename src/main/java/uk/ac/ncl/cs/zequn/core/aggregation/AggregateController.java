@@ -22,8 +22,13 @@ public class AggregateController {
     private final int sliceTime;
     private final int rangeTime;
     private Timer timer;
-//    private TimerTask timerTask;
-    private final Result result;
+
+    public void setResult(Result result) {
+        this.result = result;
+    }
+
+    //    private TimerTask timerTask;
+    private Result result;
     private final AtomicReference<Tuple> remoteOldTuple = new AtomicReference<Tuple>();
     private LinkedList<Index> index;
     private long totalCount = 0;

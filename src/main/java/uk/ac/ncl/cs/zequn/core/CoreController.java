@@ -1,5 +1,6 @@
 package uk.ac.ncl.cs.zequn.core;
 
+import uk.ac.ncl.cs.zequn.entity.Result;
 import uk.ac.ncl.cs.zequn.net.controller.ActiveRequester;
 import uk.ac.ncl.cs.zequn.net.controller.NextTupleListener;
 import uk.ac.ncl.cs.zequn.core.aggregation.AggregateController;
@@ -82,7 +83,7 @@ public class CoreController implements OldTupleRequester{
      * @param info
      * @return
      */
-    public boolean active(LinkedList<Index> info){
+    public boolean active(LinkedList<Index> info,LinkedList<Result> results){
         if(map.isEmpty()) return false;
         this.status = Status.ACTIVE;
         for(int i: map.keySet()){
@@ -90,6 +91,7 @@ public class CoreController implements OldTupleRequester{
             for(Index in:info){
                 index.add(in);
             }
+            map.get(i).setResult(results.get(i));
             map.get(i).active(index);
         }
 //        timer = new Timer();
