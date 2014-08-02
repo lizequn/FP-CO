@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bfe635ce-9822-467a-9a52-a2dbd390afda" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/uk/ac/ncl/cs/zequn/core/aggregation/AggregateController.java" afterPath="$PROJECT_DIR$/src/main/java/uk/ac/ncl/cs/zequn/core/aggregation/AggregateController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="FPco.iws" />
@@ -901,7 +900,7 @@
       <workItem from="1405497194077" duration="74000" />
       <workItem from="1405719215160" duration="23131000" />
       <workItem from="1406212637049" duration="6036000" />
-      <workItem from="1406736200182" duration="13860000" />
+      <workItem from="1406736200182" duration="13903000" />
     </task>
     <task id="LOCAL-00001" summary="god">
       <created>1404142707036</created>
@@ -971,11 +970,15 @@
       <created>1406940446148</created>
       <updated>1406940446148</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="fix index">
+      <created>1406941143780</created>
+      <updated>1406941143780</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="72493000" />
+    <option name="totallyTimeSpent" value="72536000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1209" height="778" extended-state="6" />
