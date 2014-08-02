@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bfe635ce-9822-467a-9a52-a2dbd390afda" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/uk/ac/ncl/cs/zequn/net/controller/ActiveController.java" afterPath="$PROJECT_DIR$/src/main/java/uk/ac/ncl/cs/zequn/net/controller/ActiveController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/uk/ac/ncl/cs/zequn/core/CoreController.java" afterPath="$PROJECT_DIR$/src/main/java/uk/ac/ncl/cs/zequn/core/CoreController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/uk/ac/ncl/cs/zequn/net/service/CoreService.java" afterPath="$PROJECT_DIR$/src/main/java/uk/ac/ncl/cs/zequn/net/service/CoreService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/uk/ac/ncl/cs/zequn/net/service/impl/CoreServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/uk/ac/ncl/cs/zequn/net/service/impl/CoreServiceImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="FPco.iws" />
@@ -29,16 +26,16 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="CoreController.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="CoreController.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/uk/ac/ncl/cs/zequn/core/CoreController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="843" max-vertical-offset="2715">
-              <caret line="83" column="21" selection-start-line="83" selection-start-column="21" selection-end-line="83" selection-end-column="21" />
+            <state vertical-scroll-proportion="0.7007042" vertical-offset="1286" max-vertical-offset="2745">
+              <caret line="101" column="13" selection-start-line="101" selection-start-column="13" selection-end-line="101" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2461#2468#0" expanded="true" />
                 <element signature="e#2523#2531#0" expanded="true" />
-                <element signature="e#4181#4188#0" expanded="true" />
+                <element signature="e#4232#4239#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -127,10 +124,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CoreServiceImpl.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="CoreServiceImpl.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/uk/ac/ncl/cs/zequn/net/service/impl/CoreServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5283019" vertical-offset="528" max-vertical-offset="1005">
+            <state vertical-scroll-proportion="0.0" vertical-offset="528" max-vertical-offset="1005">
               <caret line="70" column="0" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
               <folding />
             </state>
@@ -204,10 +201,10 @@
         <option value="$PROJECT_DIR$/src/main/java/uk/ac/ncl/cs/zequn/core/aggregation/AggregateController.java" />
         <option value="$PROJECT_DIR$/src/main/java/uk/ac/ncl/cs/zequn/net/entity/ActiveEntity.java" />
         <option value="$PROJECT_DIR$/src/main/java/uk/ac/ncl/cs/zequn/net/controller/ActiveRequester.java" />
-        <option value="$PROJECT_DIR$/src/main/java/uk/ac/ncl/cs/zequn/core/CoreController.java" />
         <option value="$PROJECT_DIR$/src/main/java/uk/ac/ncl/cs/zequn/net/controller/ActiveController.java" />
         <option value="$PROJECT_DIR$/src/main/java/uk/ac/ncl/cs/zequn/net/service/CoreService.java" />
         <option value="$PROJECT_DIR$/src/main/java/uk/ac/ncl/cs/zequn/net/service/impl/CoreServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/uk/ac/ncl/cs/zequn/core/CoreController.java" />
       </list>
     </option>
   </component>
@@ -905,7 +902,7 @@
       <workItem from="1405497194077" duration="74000" />
       <workItem from="1405719215160" duration="23131000" />
       <workItem from="1406212637049" duration="6036000" />
-      <workItem from="1406736200182" duration="15656000" />
+      <workItem from="1406736200182" duration="16039000" />
     </task>
     <task id="LOCAL-00001" summary="god">
       <created>1404142707036</created>
@@ -987,11 +984,15 @@
       <created>1406942636658</created>
       <updated>1406942636658</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="fix result">
+      <created>1406942940265</created>
+      <updated>1406942940265</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="74289000" />
+    <option name="totallyTimeSpent" value="74672000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1209" height="778" extended-state="6" />
@@ -1019,7 +1020,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19451585" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28191945" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.11060606" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4030303" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1422,19 +1423,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/uk/ac/ncl/cs/zequn/core/CoreController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="843" max-vertical-offset="2715">
-          <caret line="83" column="21" selection-start-line="83" selection-start-column="21" selection-end-line="83" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2461#2468#0" expanded="true" />
-            <element signature="e#2523#2531#0" expanded="true" />
-            <element signature="e#4181#4188#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/uk/ac/ncl/cs/zequn/net/controller/InitController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="295" max-vertical-offset="795">
@@ -1472,9 +1460,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/uk/ac/ncl/cs/zequn/net/service/impl/CoreServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5283019" vertical-offset="528" max-vertical-offset="1005">
+        <state vertical-scroll-proportion="0.0" vertical-offset="528" max-vertical-offset="1005">
           <caret line="70" column="0" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/uk/ac/ncl/cs/zequn/core/CoreController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7007042" vertical-offset="1286" max-vertical-offset="2745">
+          <caret line="101" column="13" selection-start-line="101" selection-start-column="13" selection-end-line="101" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2461#2468#0" expanded="true" />
+            <element signature="e#2523#2531#0" expanded="true" />
+            <element signature="e#4232#4239#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

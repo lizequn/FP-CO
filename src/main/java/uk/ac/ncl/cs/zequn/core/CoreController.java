@@ -97,7 +97,9 @@ public class CoreController implements OldTupleRequester{
             for(Index in:info){
                 index.add(in);
             }
-            map.get(i).setResult(results.get(i));
+            if(results !=null) {
+                map.get(i).setResult(results.get(i));
+            }
             map.get(i).active(index);
         }
 //        timer = new Timer();
