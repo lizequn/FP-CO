@@ -20,6 +20,6 @@ public interface CoreService {
     void initStart();
     List<Tuple> getOldTuple();
     void activeServer(ActiveEntity entity);
-    LinkedList<Index> passiveServer();
+    ActiveEntity passiveServer();
     void handleStream(StreamTuple tuple);
 }

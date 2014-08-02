@@ -63,7 +63,7 @@ public class CoreServiceImpl implements CoreService {
     }
 
     @Override
-    public LinkedList<Index> passiveServer() {
+    public ActiveEntity passiveServer() {
         if(coreController == null) throw new IllegalStateException();
         if(coreController.checkStatus(Status.PASSIVE)) throw new IllegalStateException();
         return coreController.passive();

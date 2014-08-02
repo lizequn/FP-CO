@@ -7,6 +7,7 @@ import uk.ac.ncl.cs.zequn.core.aggregation.AggregateController;
 import uk.ac.ncl.cs.zequn.core.aggregation.Index;
 import uk.ac.ncl.cs.zequn.entity.StreamTuple;
 import uk.ac.ncl.cs.zequn.entity.Tuple;
+import uk.ac.ncl.cs.zequn.net.entity.ActiveEntity;
 import uk.ac.ncl.cs.zequn.strategy.Aggregation;
 
 import java.util.*;
@@ -66,16 +67,21 @@ public class CoreController implements OldTupleRequester{
      * Working in passive mode
      * @return new global index
      */
-    public LinkedList<Index> passive(){
+    public ActiveEntity passive(){
 
         if(map.isEmpty()) throw new IllegalStateException();
         this.status = Status.PASSIVE;
         LinkedList<Index> result = new LinkedList<Index>();
+        LinkedList<Result> results = new LinkedList<Result>();
         for(AggregateController controller:map.values()){
             result = controller.passive();
+            results.add(controller.getResult());
         }
+        ActiveEntity entity = new ActiveEntity();
+        entity.setIndex(result);
+        entity.setResult(results);
         logger.info("passive");
-        return result;
+        return entity;
     }
 
     /**
@@ -139,10 +145,10 @@ public class CoreController implements OldTupleRequester{
     }
 
     private void changeActive(){
-        ActiveRequester requester = new ActiveRequester();
-//        timer.cancel();
-//        workingTime =20;
-        requester.changeActive(this.passive());
+//        ActiveRequester requester = new ActiveRequester();
+////        timer.cancel();
+////        workingTime =20;
+//        requester.changeActive(this.passive());
     }
 
     public int getWorkingTime() {
@@ -161,11 +167,9 @@ public class CoreController implements OldTupleRequester{
             logger.info("Request Next");
             List<Tuple> re =  listener.getResult(id);
             if(re ==null){
-                logger.info("RN:null");
                 count = 0;
                 return;
             }
-            logger.info("RN:1");
             for(int i = 0;i<re.size();i++){
                 AggregateController controller = map.get(i);
                 Tuple tuple = re.get(i);

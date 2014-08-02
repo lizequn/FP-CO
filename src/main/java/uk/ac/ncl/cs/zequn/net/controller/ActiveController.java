@@ -27,7 +27,7 @@ public class ActiveController {
     }
     @RequestMapping(value = "stopActive")
     @ResponseBody
-    public LinkedList<Index> stopActive(){
+    public ActiveEntity stopActive(){
         return service.passiveServer();
     }
     @RequestMapping(value = "stream")
