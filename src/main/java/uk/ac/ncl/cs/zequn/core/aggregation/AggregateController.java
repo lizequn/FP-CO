@@ -22,7 +22,7 @@ public class AggregateController {
     private final int sliceTime;
     private final int rangeTime;
     private Timer timer;
-    private final TimerTask timerTask;
+//    private TimerTask timerTask;
     private final Result result;
     private final AtomicReference<Tuple> remoteOldTuple = new AtomicReference<Tuple>();
     private LinkedList<Index> index;
@@ -39,46 +39,46 @@ public class AggregateController {
         this.result = new Result();
         this.timer = new Timer();
         this.requester = requester;
-        this.timerTask = new TimerTask() {
-            @Override
-            public void run() {
-                //get new tuple
-                Tuple newTuple = factory.getTuple();
-                if(newTuple == null) newTuple = new Tuple();
-                inMemoryQueue.offer(newTuple);
-                totalCount++;
-                if(index.getLast().id == Config.id){
-                    index.getLast().count++;
-                }else {
-                    Index index1 = new Index();
-                    index1.id = Config.id;
-                    index1.count = 1;
-                    index.offer(index1);
-                }
-                Tuple oldTuple = null;
-//                if(inMemoryQueue.size()>= sliceTime/rangeTime){
-//                    oldTuple = inMemoryQueue.get();//
+//        this.timerTask = new TimerTask() {
+//            @Override
+//            public void run() {
+//                //get new tuple
+//                Tuple newTuple = factory.getTuple();
+//                if(newTuple == null) newTuple = new Tuple();
+//                inMemoryQueue.offer(newTuple);
+//                totalCount++;
+//                if(index.getLast().id == Config.id){
+//                    index.getLast().count++;
+//                }else {
+//                    Index index1 = new Index();
+//                    index1.id = Config.id;
+//                    index1.count = 1;
+//                    index.offer(index1);
 //                }
-                //need moving window
-
-                if(totalCount>=rangeTime/sliceTime){
-                    if(index.getFirst().id == Config.id){
-                        oldTuple = inMemoryQueue.get();
-                        index.getFirst().count--;
-                    }else {
-                        index.getFirst().count--;
-                        //remote get
-                        //todo
-                        oldTuple = remoteOldTuple.get();
-                        requester.requestNext(Config.id);
-                    }
-                    totalCount--;
-                }
-                aggregation.updateResult(result,oldTuple,newTuple);
-                logger.info(result.getRe()+"");
-                logger.info(totalCount+"");
-            }
-        };
+//                Tuple oldTuple = null;
+////                if(inMemoryQueue.size()>= sliceTime/rangeTime){
+////                    oldTuple = inMemoryQueue.get();//
+////                }
+//                //need moving window
+//
+//                if(totalCount>=rangeTime/sliceTime){
+//                    if(index.getFirst().id == Config.id){
+//                        oldTuple = inMemoryQueue.get();
+//                        index.getFirst().count--;
+//                    }else {
+//                        index.getFirst().count--;
+//                        //remote get
+//                        //todo
+//                        oldTuple = remoteOldTuple.get();
+//                        requester.requestNext(Config.id);
+//                    }
+//                    totalCount--;
+//                }
+//                aggregation.updateResult(result,oldTuple,newTuple);
+//                logger.info(result.getRe()+"");
+//                logger.info(totalCount+"");
+//            }
+//        };
     }
     class myTimerTask extends TimerTask{
 
@@ -117,6 +117,12 @@ public class AggregateController {
                     }
                     //remote get
                     //todo
+                    while(remoteOldTuple.get()==null){
+                        try {
+                            Thread.sleep(1);
+                        } catch (InterruptedException e) {
+                        }
+                    }
                     oldTuple = remoteOldTuple.getAndSet(null);
                     requester.requestNext(index.getFirst().id);
                 }
@@ -125,8 +131,8 @@ public class AggregateController {
             }
 
             aggregation.updateResult(result,oldTuple,newTuple);
-            logger.info(result.getRe()+"");
-            logger.info(totalCount+"");
+            logger.info("result"+result.getRe()+"");
+            logger.info("total count"+totalCount+"");
         }
     }
     public Tuple get(){
@@ -145,6 +151,7 @@ public class AggregateController {
         for(Index index1:index){
             this.totalCount+=index1.count;
         }
+        logger.info("totalCount:"+totalCount);
         //init
         if(this.totalCount == 0){
             index.clear();

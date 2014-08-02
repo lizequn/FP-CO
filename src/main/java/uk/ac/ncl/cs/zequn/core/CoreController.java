@@ -155,11 +155,12 @@ public class CoreController implements OldTupleRequester{
     @Override
     public synchronized void requestNext(int id) {
         count++;
-        if(count == map.size()){
+        if(count >= map.size()){
             logger.info("Request Next");
             List<Tuple> re =  listener.getResult(id);
             if(re ==null){
                 logger.info("RN:null");
+                count = 0;
                 return;
             }
             logger.info("RN:1");
