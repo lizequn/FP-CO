@@ -23,7 +23,7 @@ public class MonitorServiceImpl implements MonitorService {
             if(free<50){
                 freeF = false;
                 restTemplate.getForObject(Config.dispatcher+"/updateStatus/"+Config.id+"/"+free,Integer.class);
-            }else if(free >50&&!freeF){
+            }else if(free >50){
                 freeF = true;
                 restTemplate.getForObject(Config.dispatcher+"/updateStatus/"+Config.id+"/"+free,Integer.class);
             }
@@ -32,7 +32,7 @@ public class MonitorServiceImpl implements MonitorService {
     @Override
     public void start() {
         Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new task(),10000,10000);
+        timer.scheduleAtFixedRate(new task(),0,10000);
     }
     public static void main(String [] args){
         System.out.println(Runtime.getRuntime().freeMemory()/1024/1024);

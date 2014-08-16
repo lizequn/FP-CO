@@ -27,7 +27,7 @@ public class InitService implements ApplicationListener<ContextRefreshedEvent> {
 
         String url = Config.dispatcher;
         //register
-        int id = restTemplate.getForObject(url+"/register/127.0.0.1:9000.ig",Integer.class);
+        int id = restTemplate.getForObject(url+"/register/127.0.0.1:9002.ig",Integer.class);
         Config.id = id;
         service.start();
 
