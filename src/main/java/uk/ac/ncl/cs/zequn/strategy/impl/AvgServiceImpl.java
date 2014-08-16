@@ -2,26 +2,22 @@ package uk.ac.ncl.cs.zequn.strategy.impl;
 
 import uk.ac.ncl.cs.zequn.entity.Result;
 import uk.ac.ncl.cs.zequn.entity.SingleTuple;
-import uk.ac.ncl.cs.zequn.entity.StreamTuple;
 import uk.ac.ncl.cs.zequn.entity.Tuple;
 import uk.ac.ncl.cs.zequn.net.entity.TupleCollection;
 import uk.ac.ncl.cs.zequn.strategy.Aggregation;
 
-import java.util.List;
-
 /**
- * Created by zequnli on 30/06/2014.
+ * Created by zequnli on 16/08/2014.
  */
-public class AvgImpl implements Aggregation {
-    private int id;
-    public AvgImpl(int id){
+public class AvgServiceImpl implements Aggregation {private int id;
+    public AvgServiceImpl(int id){
         this.id = id;
     }
 
     @Override
     public void handleStream(Tuple tuple, SingleTuple sTuple) {
         if(this.id == sTuple.getServiceId()){
-            tuple.increase(sTuple.getWaitingTime());
+            tuple.increase(sTuple.getServiceTime());
         }
     }
 

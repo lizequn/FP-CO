@@ -26,7 +26,7 @@ public class InitController {
     @ResponseBody
     public int initServer(@PathVariable int id,@PathVariable int f,@PathVariable int b){
         Config.init(id,f,b);
-        AggStrategy.init();
+//        AggStrategy.init();
         service.initServer(id,new NextTupleImpl());
         return 1;
     }

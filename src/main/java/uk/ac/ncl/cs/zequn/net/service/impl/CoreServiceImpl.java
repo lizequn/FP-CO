@@ -37,9 +37,8 @@ public class CoreServiceImpl implements CoreService {
     @Override
     public boolean createNewAggregation(AggregationCreationEntity entity) {
         String agg = entity.getAggStrategy();
-        Aggregation fun = AggStrategy.getByString(agg);
+        Aggregation fun = AggStrategy.getByString(agg,entity.getAggServiceId());
         coreController.createNewController(entity.getId(),fun,entity.getSlice(),entity.getRange());
-
         return true;
     }
 

@@ -1,16 +1,18 @@
 package uk.ac.ncl.cs.zequn.entity;
 
+import java.util.List;
+
 /**
  * Created by zequnli on 1/06/2014.
  */
 public class StreamTuple {
-    private double info;
+    private List<SingleTuple> tuples;
 
-    public double getInfo() {
-        return info;
+    public List<SingleTuple> getTuples() {
+        return tuples;
     }
 
-    public void setInfo(double info) {
-        this.info = info;
+    public void setTuples(List<SingleTuple> tuples) {
+        this.tuples = tuples;
     }
 }

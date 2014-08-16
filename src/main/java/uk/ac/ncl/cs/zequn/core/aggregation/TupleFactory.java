@@ -1,5 +1,6 @@
 package uk.ac.ncl.cs.zequn.core.aggregation;
 
+import uk.ac.ncl.cs.zequn.entity.SingleTuple;
 import uk.ac.ncl.cs.zequn.entity.StreamTuple;
 import uk.ac.ncl.cs.zequn.entity.Tuple;
 import uk.ac.ncl.cs.zequn.strategy.Aggregation;
@@ -16,10 +17,10 @@ public class TupleFactory {
 
     }
 
-    public void offer(StreamTuple streamTuple){
+    public void offer(SingleTuple sTuple){
         synchronized (lock){
             if(tuple == null) tuple = new Tuple();
-            aggregation.handleStream(tuple,streamTuple);
+            aggregation.handleStream(tuple,sTuple);
         }
     }
 

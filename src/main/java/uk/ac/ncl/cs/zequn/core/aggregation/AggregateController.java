@@ -3,6 +3,7 @@ package uk.ac.ncl.cs.zequn.core.aggregation;
 import uk.ac.ncl.cs.zequn.core.Config;
 import uk.ac.ncl.cs.zequn.core.OldTupleRequester;
 import uk.ac.ncl.cs.zequn.entity.Result;
+import uk.ac.ncl.cs.zequn.entity.SingleTuple;
 import uk.ac.ncl.cs.zequn.entity.StreamTuple;
 import uk.ac.ncl.cs.zequn.entity.Tuple;
 import uk.ac.ncl.cs.zequn.strategy.Aggregation;
@@ -141,7 +142,7 @@ public class AggregateController {
             }
 
             aggregation.updateResult(result,oldTuple,newTuple);
-            logger.info("result"+result.getRe()+"");
+            logger.info("result"+result.getRe()/result.getSize()+"");
             logger.info("total count"+totalCount+"");
         }
     }
@@ -150,7 +151,10 @@ public class AggregateController {
         return inMemoryQueue.get();
     }
     public void offer(StreamTuple streamTuple){
-        factory.offer(streamTuple);
+        for(SingleTuple tuple:streamTuple.getTuples()){
+            factory.offer(tuple);
+        }
+
     }
     public Result getResult(){
         return result;
