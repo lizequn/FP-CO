@@ -7,6 +7,25 @@ public class Result {
     private double re;
     private int size;
 
+    public long getExceptedTime() {
+        return exceptedTime;
+    }
+
+    public void setExceptedTime(long exceptedTime) {
+        this.exceptedTime = exceptedTime;
+    }
+
+    public long getRealTimeWithoutNet() {
+        return realTimeWithoutNet;
+    }
+
+    public void setRealTimeWithoutNet(long realTimeWithoutNet) {
+        this.realTimeWithoutNet = realTimeWithoutNet;
+    }
+
+    private long exceptedTime;
+    private long realTimeWithoutNet;
+
     public void addNew(Tuple tuple){
         re+=tuple.getInfo();
         size+=tuple.getSize();

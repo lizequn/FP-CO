@@ -3,6 +3,7 @@ package uk.ac.ncl.cs.zequn.net.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import uk.ac.ncl.cs.zequn.core.Config;
+import uk.ac.ncl.cs.zequn.entity.ResultCollection;
 import uk.ac.ncl.cs.zequn.entity.Tuple;
 import uk.ac.ncl.cs.zequn.net.entity.TupleCollection;
 
@@ -23,5 +24,14 @@ public class NextTupleImpl implements NextTupleListener {
         String rUrl = url+"/"+Config.PASSIVE+"/"+id;
         TupleCollection collection =  restTemplate.getForObject(rUrl, TupleCollection.class);
         return collection.getList();
+    }
+
+    @Override
+    public void pushResult(ResultCollection collection) {
+        String url = Config.dispatcher+"/result";
+        int i = restTemplate.postForObject(url,collection,Integer.class);
+        if(i!=0){
+            System.out.println("un");
+        }
     }
 }

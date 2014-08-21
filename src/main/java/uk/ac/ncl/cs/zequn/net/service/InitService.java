@@ -5,6 +5,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+import uk.ac.ncl.cs.zequn.BaseConfig;
 import uk.ac.ncl.cs.zequn.core.Config;
 
 import java.util.TimerTask;
@@ -27,7 +28,7 @@ public class InitService implements ApplicationListener<ContextRefreshedEvent> {
 
         String url = Config.dispatcher;
         //register
-        int id = restTemplate.getForObject(url+"/register/127.0.0.1:9002.ig",Integer.class);
+        int id = restTemplate.getForObject(url+"/register/"+ BaseConfig.myUrl,Integer.class);
         Config.id = id;
         service.start();
 

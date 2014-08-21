@@ -1,6 +1,7 @@
 package uk.ac.ncl.cs.zequn.core;
 
 import uk.ac.ncl.cs.zequn.entity.Result;
+import uk.ac.ncl.cs.zequn.entity.ResultCollection;
 import uk.ac.ncl.cs.zequn.net.controller.ActiveRequester;
 import uk.ac.ncl.cs.zequn.net.controller.NextTupleListener;
 import uk.ac.ncl.cs.zequn.core.aggregation.AggregateController;
@@ -21,10 +22,11 @@ public class CoreController implements OldTupleRequester{
     private Map<Integer,AggregateController> map;
     private Status status = Status.WAITING;
     private int count;
+    private int resultCount;
     private final NextTupleListener listener;
     //private final TimerTask timeCounter;
     //private Timer timer;
-
+    private ResultCollection resultCollection = new ResultCollection();
     private int workingTime =20;
     /*
     init add listener used to get tuple from other coordinator
@@ -178,6 +180,17 @@ public class CoreController implements OldTupleRequester{
                 controller.setOldTuple(tuple);
             }
             count = 0;
+        }
+    }
+
+    @Override
+    public synchronized void pushResult(Result result) {
+        resultCollection.addResult(result);
+        resultCount++;
+        if(resultCount>=map.size()){
+            listener.pushResult(resultCollection);
+            resultCollection.clean();
+            resultCount = 0;
         }
     }
 }

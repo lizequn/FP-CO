@@ -36,6 +36,7 @@ public class AggregateController {
     private OldTupleRequester requester;
     private Aggregation aggregation;
     public AggregateController(final int aggregateID,final Aggregation aggregation, final int sliceTime, final int rangeTime,final OldTupleRequester requester){
+        logger.setUseParentHandlers(false);
         this.aggregateID = aggregateID;
         this.aggregation = aggregation;
         this.inMemoryQueue = new InMemoryQueue();
@@ -90,6 +91,7 @@ public class AggregateController {
 
         @Override
         public void run() {
+            result.setExceptedTime(System.currentTimeMillis());
             //get new tuple
             Tuple newTuple = factory.getTuple();
             if(newTuple == null) newTuple = new Tuple();
@@ -142,8 +144,10 @@ public class AggregateController {
             }
 
             aggregation.updateResult(result,oldTuple,newTuple);
-            logger.info("result"+result.getRe()/result.getSize()+"");
-            logger.info("total count"+totalCount+"");
+            result.setRealTimeWithoutNet(System.currentTimeMillis());
+            requester.pushResult(result);
+//            logger.info("result"+result.getRe()/result.getSize()+"");
+//            logger.info("total count"+totalCount+"");
         }
     }
     public Tuple get(){
