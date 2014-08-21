@@ -15,8 +15,10 @@ import java.util.Map;
  */
 public class NextTupleImpl implements NextTupleListener {
     private RestTemplate restTemplate;
+    private RestTemplate restTemplate1;
     public NextTupleImpl(){
         restTemplate = new RestTemplate();
+        restTemplate1 = new RestTemplate();
     }
     @Override
     public List<Tuple> getResult(int id) {
@@ -29,7 +31,7 @@ public class NextTupleImpl implements NextTupleListener {
     @Override
     public void pushResult(ResultCollection collection) {
         String url = Config.dispatcher+"/result";
-        int i = restTemplate.postForObject(url,collection,Integer.class);
+        int i = restTemplate1.postForObject(url,collection,Integer.class);
         if(i!=0){
             System.out.println("un");
         }

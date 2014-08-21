@@ -33,7 +33,12 @@ public class ActiveController {
     @RequestMapping(value = "stream")
     @ResponseBody
     public void stream(@RequestBody StreamTuple tuple){
-        service.handleStream(tuple);
+        try{
+            service.handleStream(tuple);
+
+        }catch (Exception e){
+
+        }
     }
 
 }

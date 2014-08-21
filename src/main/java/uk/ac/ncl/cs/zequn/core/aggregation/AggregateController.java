@@ -23,14 +23,15 @@ public class AggregateController {
     private final int sliceTime;
     private final int rangeTime;
     private Timer timer;
-
+    private boolean findOld = false;
+    private static int finished = 0;
     public void setResult(Result result) {
         this.result = result;
     }
 
     //    private TimerTask timerTask;
     private Result result;
-    private final AtomicReference<Tuple> remoteOldTuple = new AtomicReference<Tuple>();
+    private Tuple remoteOldTuple = null;
     private LinkedList<Index> index;
     private long totalCount = 0;
     private OldTupleRequester requester;
@@ -111,6 +112,7 @@ public class AggregateController {
 //                }
             //need moving window
 
+            logger.info(finished+++""+ totalCount+":"+rangeTime/sliceTime);
             if(totalCount>=rangeTime/sliceTime){
                 if(index.getFirst().id == Config.id){
                     oldTuple = inMemoryQueue.get();
@@ -119,27 +121,27 @@ public class AggregateController {
                         index.pollFirst();
                     }
                 }else {
-                    index.getFirst().count--;
-                    if(index.getFirst().count ==0){
-                        index.pollFirst();
-                    }
-                    //remote get
-                    //todo
                     boolean f = false;
-                    while(remoteOldTuple.get()==null){
+                    while(!findOld){
                         if(!f){
-                            f = true;
                             requester.requestNext(index.getFirst().id);
+                            f=true;
                         }
                         try {
                             Thread.sleep(1);
                         } catch (InterruptedException e) {
+                            e.printStackTrace();
                         }
                     }
-                    oldTuple = remoteOldTuple.getAndSet(null);
-                    requester.requestNext(index.getFirst().id);
-                }
+                    index.getFirst().count--;
+                    if(index.getFirst().count ==0){
+                        index.pollFirst();
+                    }
 
+                    oldTuple = remoteOldTuple;
+                    remoteOldTuple = null;
+                    findOld = false;
+                }
                 totalCount--;
             }
 
@@ -151,7 +153,7 @@ public class AggregateController {
         }
     }
     public Tuple get(){
-        logger.info("get Tuple");
+        //logger.info("get Tuple");
         return inMemoryQueue.get();
     }
     public void offer(StreamTuple streamTuple){
@@ -169,7 +171,7 @@ public class AggregateController {
         for(Index index1:index){
             this.totalCount+=index1.count;
         }
-        logger.info("totalCount:"+totalCount);
+        //logger.info("totalCount:"+totalCount);
         //init
         if(this.totalCount == 0){
             index.clear();
@@ -182,10 +184,13 @@ public class AggregateController {
 
     }
     public void setOldTuple(Tuple tuple){
-        if(remoteOldTuple.get() ==null){
-            remoteOldTuple.set(tuple);
+        if(remoteOldTuple ==null){
+            findOld = true;
+            remoteOldTuple =tuple;
         }else {
-            throw new IllegalStateException();
+            // throw new IllegalStateException();
+            logger.info("reSet:"+System.currentTimeMillis());
+
         }
     }
     public int getAggregateID() {
@@ -193,14 +198,14 @@ public class AggregateController {
     }
     public LinkedList<Index> passive(){
         timer.cancel();
-        logger.info("passive");
+        // logger.info("passive");
         return index;
     }
     public void active(LinkedList<Index> in){
-        logger.info("active");
+        //logger.info("active");
         timer = new Timer();
         this.setIndex(in);
-        logger.info("index:" +in.getFirst());
-        timer.scheduleAtFixedRate(new myTimerTask(),0,sliceTime);
+        //logger.info("index:" +in.getFirst());
+        timer.schedule(new myTimerTask(), 0, sliceTime);
     }
 }
